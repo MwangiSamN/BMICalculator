@@ -14,7 +14,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -64,6 +68,9 @@ fun BmiCalculatorApp(){
         CalculateBtn {
 
         }
+        Spacer(modifier = Modifier.weight(1.0f))
+        NavigationBarView()
+
     }
 }
 
@@ -131,7 +138,7 @@ fun OutlinedTextFields(){
                 onDone = { focusManager.clearFocus() }
             ),
             shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(370.dp)
+            modifier = Modifier.width(370.dp),
         )
     }
 }
@@ -140,9 +147,42 @@ fun OutlinedTextFields(){
 fun CalculateBtn(onClick: () -> Unit) {
     Button(
         onClick = { onClick() },
-        modifier = Modifier.height(40.dp).width(300.dp)
+        modifier = Modifier
+            .height(40.dp)
+            .width(300.dp)
     ) {
         Text("Calculate")
+    }
+}
+
+
+@Composable
+fun NavigationBarView(){
+
+
+    NavigationBar {
+        NavigationBarItem(
+                icon = {
+                    Icon(
+                        painterResource(id = R.drawable.calculate),
+                        contentDescription = null
+                    )
+                       },
+                label = { Text(text = "BMI") },
+                selected = true,
+                onClick = { /* TODO */ }
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.info),
+                    contentDescription = null
+                )
+            },
+            label = { Text(text = "Info") },
+            selected = false,
+            onClick = { /* TODO */ }
+        )
     }
 }
 
